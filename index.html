@@ -78,86 +78,48 @@
                                   <div class="product-details">
                                     <div class="stat">
                                       <strong class="stat-heading"
-                                        ><i class="fas fa-map-marker-alt icon"></i>First Location:</strong
+                                        ><i class="fas fa-map-marker-alt icon"></i><span id="first-location-heading" >First Location:</span></strong
                                       >
                                       <span id="first-location">${data.firstLocation
           }</span>
                                     </div>
                                     <div class="stat">
                                       <strong class="stat-heading"
-                                        ><i class="fas fa-clock icon"></i>First Scanned Time:</strong
+                                        ><i class="fas fa-clock icon"></i><span id="first-scanned-time-heading" style="font-weight: 600;">First Scanned Time:</span></strong
                                       >
                                       <span id="first-scanned-time">${new Date(
             data.firstScannedTime,
           ).toLocaleString()}</span>
                                     </div>
                                     <div>
-                                      <span class="brand-name-heading"><strong>Brand:</strong> <span id="brand-name-detail">${data.brandName
+                                      <span class="brand-name-heading"><strong style="font-weight: 600;">Brand:</strong> <span id="brand-name-detail">${data.brandName
           }</span></span>
                                     </div>
                                     <div>
-                                      <span class="product-description-heading"><strong>Description:</strong> <span class="product-description">${data.description
+                                      <span class="product-description-heading" ><strong style="font-weight: 600;">Description:</strong> <span class="product-description">${data.description
           }</span></span>
                                     </div>
                                     <div class="split-container">
                                     <div class="split-column">
-                                    <div>
-                                      <strong>Category:</strong> <span id="product-category">${data.category
-          }</span>
-                                    </div>
-                                    <div>
-                                      <strong>Subcategory:</strong> <span id="product-subcategory">${data.subCategory
-          }</span>
-                                    </div>
-                                    <div>
-                                      <strong>Price:</strong> <span>$</span
-                                      ><span id="product-price">${data.retailPrice.toFixed(
-            2,
-          )}</span>
-                                    </div>
-                                    <div>
-                                      <strong>THC:</strong> <span id="product-thc">${data.attrs.find(
-            (attr) => attr.name === "THC",
-          )?.value
-          }</span><span>%</span>
-                                    </div>
-                                    <div>
-                                      <strong>CBD:</strong> <span id="product-cbd">${data.attrs.find(
-            (attr) => attr.name === "CBD",
-          )?.value
-          }</span><span>%</span>
-                                    </div>
-                                    </div>
-                                    <div class="split-column">
-                                    <div>
-                                      <strong>Total Cannabinoids:</strong>
-                                      <span id="product-cannabinoids">${data.attrs.find(
-            (attr) => attr.name === "Cannabinoids",
-          )?.value
-          }</span>
-                                    </div>
-                                    <div><strong>Strain:</strong> <span id="product-strain">${data.attrs.find(
-            (attr) => attr.name === "Strain",
-          )?.value
-          }</span></div>
-                                    <div>
-                                      <strong>Size:</strong> <span id="product-size">${data.attrs.find(
-            (attr) => attr.name === "Size",
-          )?.value
-          }</span
-                                      ><span>grams</span>
-                                    </div>
-                                    <div>
-                                      <strong>Effects:</strong> <span id="product-effects">${data.attrs.find(
-            (attr) => attr.name === "Effects",
-          )?.value
-          }</span>
-                                    </div>
+                                      <div>
+  ${data.category ? `<div><strong style="font-weight: 600;">Category:</strong> <span id="product-category">${data.category}</span></div>` : ''}
+  ${data.subCategory ? `<div><strong style="font-weight: 600;">Subcategory:</strong> <span id="product-subcategory">${data.subCategory}</span></div>` : ''}
+  ${data.retailPrice !== undefined ? `<div><strong style="font-weight: 600;">Price:</strong> <span>$</span><span id="product-price">${data.retailPrice.toFixed(2)}</span></div>` : ''}
+  ${data.attrs.find(attr => attr.name === "THC")?.value !== undefined ? `<div><strong style="font-weight: 600;">THC:</strong> <span id="product-thc">${data.attrs.find(attr => attr.name === "THC")?.value}</span><span>%</span></div>` : ''}
+  ${data.attrs.find(attr => attr.name === "CBD")?.value !== undefined ? `<div><strong style="font-weight: 600;">CBD:</strong> <span id="product-cbd">${data.attrs.find(attr => attr.name === "CBD")?.value}</span><span>%</span></div>` : ''}
+</div>
+<div class="split-column">
+  ${data.attrs.find(attr => attr.name === "Cannabinoids")?.value !== undefined ? `<div><strong style="font-weight: 600;">Total Cannabinoids:</strong> <span id="product-cannabinoids">${data.attrs.find(attr => attr.name === "Cannabinoids")?.value}</span></div>` : ''}
+  ${data.attrs.find(attr => attr.name === "Strain")?.value !== undefined ? `<div><strong style="font-weight: 600;">Strain:</strong> <span id="product-strain">${data.attrs.find(attr => attr.name === "Strain")?.value}</span></div>` : ''}
+  ${data.attrs.find(attr => attr.name === "Size")?.value !== undefined ? `<div><strong style="font-weight: 600;">Size:</strong> <span id="product-size">${data.attrs.find(attr => attr.name === "Size")?.value}</span><span>grams</span></div>` : ''}
+  ${data.attrs.find(attr => attr.name === "Effects")?.value !== undefined ? `<div><strong>Effects:</strong> <span id="product-effects">${data.attrs.find(attr => attr.name === "Effects")?.value}</span></div>` : ''}
+</div>
+
                                     </div>
                                   </div>
                                   <div class="button-container">
                                   <button onclick="openModal()" class="shop-now-button">
-          SHOP NOW <span class="arrow">&gt;</span>
+          SHOP NOW 
         </button>
         </div>
         <div id="emailModal" class="modal">
@@ -286,6 +248,10 @@
       padding-left: 15px;
     }
 
+    #first-location-heading {
+      font-weight: 700;
+    }
+
     #first-scanned-time {
       font-size: 14px;
       padding-left: 15px;
@@ -387,7 +353,6 @@
       min-width: 50%;
       box-sizing: border-box;
       padding: 1px;
-      padding-left: 20px;
       padding-right: 20px;
     }
 
@@ -432,7 +397,9 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       border-radius: 8px;
     }
-
+.modal-content h2{
+color: #3a7373;
+}
     .close {
       color: #43797c;
       float: right;
@@ -465,7 +432,7 @@
     }
 
     .subscribe-btn {
-      background-color: #6a9c9d !important;
+      background-color: #3a7373 !important;
       color: white;
       padding: 12px 20px;
       border: none;
@@ -473,6 +440,7 @@
       cursor: pointer;
       width: 100%;
       font-size: 16px;
+      margin-top: 10px;
     }
 
     .subscribe-btn:hover {
@@ -494,12 +462,7 @@
       position: relative;
       overflow: hidden;
       transition: background-color 0.3s, color 0.3s;
-    }
-
-    .shop-now-button .arrow {
-      margin-left: 10px;
-      color: #a3d9d9;
-      font-size: 20px;
+      margin-bottom: 80px;
     }
 
     .shop-now-button::before {
@@ -559,12 +522,22 @@
 
       .product-title {
         font-size: 1.5em;
+        text-align: center;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: linear-gradient(to right, #43797c, #6a9c9d);
       }
 
       .product-content {
         flex-direction: column;
       }
-
+#first-location{
+  font-weight: 600;
+  font-size: 17px;
+  padding-left: 15px;
+}
       .product-header {
         margin-bottom: 20px;
       }
@@ -594,6 +567,7 @@
       .product-description p{
   font-size: 19px;
   padding-left: 10px;
+  padding-right: 20px;
 }
       .product-description-heading {
         font-size: 22px;
